@@ -1,0 +1,41 @@
+<% include partials/header.ejs %>
+
+<div class="container">
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/profile"><%= req.user.username%></a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/ownportfolio">Your Portfolio</a></li>
+      <li class="active"><a href="/addsc">Add Screenshot</a></li>
+      <li ><a href="/addlink">Add Link</a></li>
+      <li><a href="/summary">Portfolios summary</a></li>
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+  </div>
+</nav>
+<% if(message){ %>
+                <div class="alert alert-danger" role="alert">
+                    <p><%= message %></p>
+                </div>
+            <% } %>
+
+		<!-- Screenshot Upload -->
+  <form class="form" enctype="multipart/form-data" method="POST" action="/addsc">
+  <div class="form-group">
+    	<label> Upload your screenshot </label>
+    		<input type="file" name="userPhoto">
+    </div>
+    
+   
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    
+    
+
+
+
+
+<% include partials/footer.ejs %>

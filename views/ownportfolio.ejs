@@ -1,0 +1,60 @@
+<% include partials/header.ejs %>
+<div class="container">
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/profile"><%= req.user.username%></a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/ownportfolio">Your Portfolio</a></li>
+      <li><a href="/addsc">Add Screenshot</a></li>
+      <li ><a href="/addlink">Add Link</a></li>
+      <li><a href="/summary">Portfolios summary</a></li>
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="row">
+	<% if(img != 'http://placehold.it/380x500'){ %>
+	<img src="/<%= img %>" class="img-rounded" target="_blank" alt="img" width="500" height="236">
+	<% } else { %>
+	<img src="<%= img %>" class="img-rounded" target="_blank" alt="img" width="500" height="236">
+	<% } %>
+</div>
+<div class="row">
+<div class="col-md-6" style="margin-top: 10px">
+<ul class="list-group">
+  <li class="list-group-item list-group-item-success">Name of the Student: <%= username%></li>
+  <li class="list-group-item list-group-item-success">Name of the Portfolio: <%= name%></li>
+</div>
+</div>
+
+<div class="row">
+<div style="margin-top: 10px; text-align: left;">
+	<% if(n>0){ %>
+	<h3> Works as Links</h3><br>
+				<div class="list-group">
+				<% links.forEach(function(link){ %>
+					<a href="#" class="list-group-item"><%= link %></a>
+				<% }) %>
+				</div>
+			<% } %>
+</div>
+</div>
+
+<div class="row">
+<div style="margin-top: 10px;margin-bottom: 10px">
+	<% if(m>0){ %>
+				<h3> Works as Screenshots</h3><br>
+				<% screenShots.forEach(function(sc){ %>
+					<img src="/<%= sc %>" class="img-rounded" target="_blank" alt="img" width="500" height="236"/>
+				<% }) %>
+				
+	<% } %>
+</div>
+</div>
+
+
+
+<% include partials/footer.ejs %>

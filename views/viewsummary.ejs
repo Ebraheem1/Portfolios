@@ -1,0 +1,100 @@
+<% include partials/header.ejs %>
+
+<div class="container">
+<% if(req.user) {%>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/profile"><%= req.user.username%></a>
+    </div>
+    <ul class="nav navbar-nav">
+    <% if (req.user.noOfProjects > 0) { %>
+      <li><a href="/ownportfolio">Your Portfolio</a></li>
+      <% } %>
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+  </div>
+</nav>
+<% } else { %>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Portfolios Website</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/login">login</a></li>
+      <li><a href="/">Register</a></li>
+    </ul>
+  </div>
+</nav>
+<% } %> 
+<div class="row">
+<% if (data.length > 0){ %>
+<% for(var i=0; i< data.length;i++) { %>
+<div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="well well-sm">
+                <div class="row">
+                    <div class="col-sm-6 col-md-4">
+                    <% if(data[i].img == ''){ %>
+                        <img src="http://placehold.it/380x500" alt="" class="img-rounded img-responsive" width="280" height="300" />
+                  	<%} else {%>
+                  		<img src="/<%= data[i].img %>" alt="" class="img-rounded" target="_blank" width="280" height="300" />
+                  	<%} %>
+
+                    </div>
+                    <div class="col-md-8">
+                        <h4><strong>Name of the Student:</strong> <%= data[i].username%></h4>
+                        <h4><strong>Name of the portfolio:</strong> <%= data[i].name %></h4>
+                    <% if(data[i].links.length > 0 && data[i].screenShots.length > 0) { %>
+                      <div class = "row">
+                    	<h5><strong>Link:</strong> <%= data[i].links[0]%> </h5></div>
+                    	<div class = "row">
+                    		<h5><strong>Screenshot:</strong></h5><br>
+                    		<img src="/<%= data[i].screenShots[0] %>" alt="" class="img-rounded img-responsive" width="300" height="400" />
+                    	</div>
+                    <% } else if(data[i].links.length > 0 && data[i].screenShots.length == 0){ %>
+                    	<h5><strong>Link:</strong> <%= data[i].links[0]%> </h5>
+                    	<% if(data[i].links.length > 1){%>
+                    	<h5><strong>Link: </strong><%= data[i].links[1]%> </h5>
+                    	<%}%>
+                    <% } else { %>
+                    	<div class = "row">
+                    		<h5><strong>Screenshot:</strong>  </h5><br>
+                    		<img src="/<%= data[i].screenShots[0] %>" alt="" class="img-rounded img-responsive" target="_blank" width="300" height="400" />
+                    	</div>
+                    	<% if(data[i].screenShots.length > 1){ %>
+                    	<div class = "row">
+                    		<h5> <strong>Screenshot:</strong></h5><br>
+                    		<img src="/<%= data[i].screenShots[1] %>" class="img-rounded img-responsive" width="300" height="400" />
+                    	</div> 
+                    	<% } %>
+                    	<%  } %> 
+                    </div>
+                </div>
+            </div>
+            </div>
+
+<% }} else{ %>
+	<div class="alert alert-danger">
+	            	<p>No Portofolios have been created</p>
+	            </div>
+<% } %>
+</div>
+
+
+
+
+<ul class="pagination pagination-sm">
+<% for(var i = 0 ; i < count ; i++) { %>
+	<% if(i == current) { %>
+		<li class="active"><a href="/summary/page/<%=i%>"><%= i+1 %></a></li>
+	<% } else{ %>
+		<li><a href="/summary/page/<%=i%>"><%= i+1 %></a></li>
+	<% }} %>
+</ul>
+
+
+
+
+<% include partials/footer.ejs %>

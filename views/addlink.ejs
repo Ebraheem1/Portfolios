@@ -1,0 +1,44 @@
+<% include partials/header.ejs %>
+<div class="container">
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/profile"><%= req.user.username%></a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/ownportfolio">Your Portfolio</a></li>
+      <li><a href="/addsc">Add Screenshot</a></li>
+      <li class="active"><a href="/addlink">Add Link</a></li>
+      <li><a href="/summary">Portfolios summary</a></li>
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+  </div>
+</nav>
+<% if(errors){ %>
+		<div class="alert alert-danger" role="alert">
+			<% if(errors){ %>
+				<ul>
+				<% errors.forEach(function(error){ %>
+					<li><%= error.msg %></li>
+				<% }) %>
+				</ul>
+			<% } %>
+			</div>
+			
+			<% } %>
+<form class="form"  method="POST" action="/addlink">
+	<div class="form-group row">
+      	<label for="smFormGroupInput" class="col-sm-2 col-form-label col-form-label-sm">Project as a link</label>
+      		<div class="col-sm-10">
+        		<input type="text" name="link" class="form-control form-control-sm" id="smFormGroupInput" placeholder="https://www.google.com.eg/">
+      		</div>
+    </div>
+    
+    
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+
+
+<% include partials/footer.ejs %>

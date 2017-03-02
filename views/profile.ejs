@@ -1,0 +1,78 @@
+<% include partials/header.ejs %>
+
+<div class="container">
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/profile"><%= req.user.username%></a>
+    </div>
+    <ul class="nav navbar-nav">
+        <% if(req.user.noOfProjects == 0){ %>
+            <li><a href="/newproject">Create Your Portfolio</a></li>
+            <li><a href="/summary">Portfolios summary</a></li>
+            <li><a href="/logout">Logout</a></li>
+        <% } else { %>
+      <li><a href="/ownportfolio">Your Portfolio</a></li>
+      <li><a href="/addlink">Add Link</a></li>
+      <li><a href="/addsc">Add Screenshot</a></li>
+      <li><a href="/summary">Portfolios summary</a></li>
+      <li><a href="/logout">Logout</a></li>
+      <% } %>
+    </ul>
+  </div>
+</nav>
+
+    <div class="row">
+    <% if(success_msg != ""){ %>
+            <div class="alert alert-success"><p><%= success_msg%></p></div>
+    <% } %>
+    <% if(error_msg!=""){ %>
+	            <div class="alert alert-danger">
+	            	<p><%= error_msg%></p>
+	            </div>
+    <% } %>
+    <% if(message){ %>
+                <div class="alert alert-danger" role="alert">
+                    <p><%= message %></p>
+                   
+                </div>
+            <% } %>
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="well well-sm">
+                <div class="row">
+                    <div class="col-sm-6 col-md-4">
+                        <img src="http://placehold.it/380x500" alt="" class="img-rounded img-responsive" />
+                    </div>
+                    <div class="col-md-4">
+                        <h4>
+                            <%= req.user.username%></h4>
+                        <small><cite>
+                        <%= req.user.country%>  <i class="glyphicon glyphicon-map-marker">
+                        </i></cite></small>
+                        <p>
+                            <i class="glyphicon glyphicon-envelope"></i><%= req.user.email%><br>
+                            <i></i> Projects updated: <%= req.user.noOfProjects%>
+                            <br />
+                            </p>
+                        
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+<style>
+    body{padding-top:30px;}
+
+    .glyphicon {  margin-bottom: 10px;margin-right: 10px;}
+
+    small {
+        display: block;
+        line-height: 1.428571429;
+        color: #999;
+    }
+</style>
+
+
+<% include partials/footer.ejs %>

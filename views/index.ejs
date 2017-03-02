@@ -1,0 +1,93 @@
+<% include partials/header.ejs %>
+<div class="container">
+<div class="container-fluid">
+    <section class="container">
+		<div class="container-page">
+		<% if(success_msg!=""){ %>
+	            <div class="alert alert-success">
+	            	<p><%= success_msg%></p>
+	            </div>
+          	<% } %>
+          	<% if(error_msg!=""){ %>
+	            <div class="alert alert-danger">
+	            	<p><%= error_msg%></p>
+	            </div>
+          	<% } %>
+
+		<% if(errors || messages){ %>
+		<div class="alert alert-danger" role="alert">
+			<% if(errors){ %>
+				<ul>
+				<% errors.forEach(function(error){ %>
+					<li><%= error.msg %></li>
+				<% }) %>
+				</ul>
+			<% } %>
+			<% if(messages){ %>
+			<p><%= messages%></p>
+			<% } %>
+			</div>
+		<% } %>				
+			<div class="col-md-6">
+				<h3 class="dark-grey">Registration</h3>
+				<form class="form" method="POST" action="/student">
+
+
+				<div class="form-group col-lg-12">
+					<label>Username</label>
+					<input name="username" class="form-control">
+				</div>
+				
+				<div class="form-group col-lg-6">
+					<label>Password</label>
+					<input type="password" name="password" class="form-control">
+				</div>
+				
+								
+				<div class="form-group col-lg-6">
+					<label>Email Address(GUC e-mail)</label>
+					<input name="email" class="form-control">
+				</div>
+				<div class="form-group col-lg-6">
+					<label>Country of Birth</label>
+					<input name="country" class="form-control">
+				</div>			
+			</div>
+		
+			<div class="col-md-6">
+				<h3 class="dark-grey">Terms and Conditions</h3>
+				<p>
+					Only MET & BI Guc students who are either seniors or post-graduates allowed to register to this website. To be able to market them selves globally ;). 
+				</p>
+				
+				<button type="submit" class="btn btn-primary">Register</button>
+			</div>
+			</form>
+			<div style="margin-top:10px" class="col-md-6">
+			<button type = "button" id="login" class = "btn btn-primary">
+      		I already have an account
+   			</button>
+
+			</div>
+			<div style="margin-top:10px" class="col-md-6">
+			<button type = "button" id="summary" class = "btn btn-primary">
+      		View Summary of portfolios
+   			</button>
+
+			</div>
+		</div>
+	</section>
+</div>
+
+<script type="text/javascript">
+    document.getElementById("login").onclick = function () {
+        window.location.replace("/login");
+    };
+</script>
+<script type="text/javascript">
+    document.getElementById("summary").onclick = function () {
+        window.location.replace("/summary");
+    };
+</script>
+
+<% include partials/footer.ejs %>
